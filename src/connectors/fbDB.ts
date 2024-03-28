@@ -1,11 +1,12 @@
-// import firebase  from 'firebase/app';
-// import 'firebase/database';
-import firebase from 'firebase-admin';
+import 'dotenv/config';
 
-import firebaseConfig from '../configs/firebaseConfig'
+var admin = require("firebase-admin");
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const fbDB = firebase.database();
+const serviceAccountKey = process.env.FIREBASE_ACCOUNT_KEY_PATH;
 
-export default fbDB;
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccountKey),
+    databaseURL: process.env.DATABASE_URL
+});
+
+export const fbDB = admin.database();
