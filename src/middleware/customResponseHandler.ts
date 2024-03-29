@@ -26,3 +26,15 @@ function successResponseMiddleware( res: Response, status: HttpStatusCode): void
 }
 
 export {successResponseMiddleware};
+
+function errorResponseMiddleware( res: Response, err: Error) {
+        res.status(res.statusCode)
+            .json({
+                status: err.status,
+                succes: false,
+                message: err.message,
+                data: err.body
+                });
+}
+
+export {errorResponseMiddleware};
