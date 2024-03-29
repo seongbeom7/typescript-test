@@ -3,6 +3,8 @@ import express,{Express} from 'express';
 import BorderRoutes from './routes/borderRoutes';
 import 'dotenv/config';
 import errorHandler from './middleware/errorHandler';
+import {defaultResponse} from './middleware/defaultResponseHandler';
+
 
 
 const app: Express = express();
@@ -14,9 +16,13 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
+
 app.use('/border',BorderRoutes);
 
+app.use(defaultResponse);
+
 app.use(errorHandler);
+
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at <https://localhost>:${port}`);
